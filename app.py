@@ -6,7 +6,7 @@ import time
 
 # --- Sayfa Ayarları ve Başlık ---
 st.set_page_config(
-    page_title="SVideo Downloader",
+    page_title="Video Downloader",
     page_icon="📥",
     layout="centered"
 )
@@ -47,7 +47,7 @@ def download_video_streamlit(url, placeholder):
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
         'noplaylist': True,
         'quiet': True,
-        'progress_hooks': [lambda d: placeholder.text(f"İndiriliyor... {d.get('_percent_str', '0%')}")]
+        'progress_hooks': [lambda d: placeholder.text(f"Downloading... {d.get('_percent_str', '0%')}")]
     }
 
     try:
