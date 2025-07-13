@@ -109,17 +109,24 @@ footer_style = """
 
 footer_html = """
 <div class="footer">
-    <p>
-        Built by 
+        <a 
+            href="https://github.com/denizyozgatli/multi-video-downloader"  
+            target="_blank"
+        >
+            View Source on GitHub
+        </a>
+    </p>
+    <p style="margin: 0; font-size: 0.8em; color: grey;">
+        A 
         <a 
             href="https://github.com/denizyozgatli" 
             target="_blank"
         >
             denizyozgatli
         </a>
+         Project
     </p>
 </div>
-"""
 
 st.markdown(footer_style, unsafe_allow_html=True)
 st.markdown(footer_html, unsafe_allow_html=True)
