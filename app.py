@@ -127,6 +127,7 @@ footer_html = """
          Project
     </p>
 </div>
+"""
 
 st.markdown(footer_style, unsafe_allow_html=True)
 st.markdown(footer_html, unsafe_allow_html=True)
