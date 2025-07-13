@@ -85,3 +85,22 @@ if st.button("Download"):
             st.warning("Please enter a valid URL.")
     else:
         st.warning("Please enter a URL.")
+
+# --- FOOTER ---
+st.markdown(
+    """
+    <div style="text-align: center; color: grey;">
+        <p>
+            Made with ❤️ by 
+            <a 
+                href="https://github.com/denizyozgatli" 
+                target="_blank" 
+                style="color: #FF4B4B; text-decoration: none;"
+            >
+                denizyozgatli
+            </a>
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
