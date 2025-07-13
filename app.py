@@ -86,7 +86,7 @@ if st.button("Download"):
     else:
         st.warning("Please enter a URL.")
 
-# --- FOOTER (CSS ile sayfa altına sabitlenmiş) ---
+# --- FOOTER ---
 footer_style = """
 <style>
 .footer {
@@ -94,15 +94,15 @@ footer_style = """
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #0E1117; /* Streamlit'in koyu tema arka plan rengi */
+    background-color: #0E1117;
     color: grey;
     text-align: center;
     padding: 10px;
-    border-top: 1px solid #262730; /* İnce bir ayırıcı çizgi */
+    border-top: 1px solid #262730;
 }
 .footer a {
-    color: #FF4B4B; /* Streamlit'in ana rengi */
-    text-decoration: none; /* Link altı çizgisini kaldırır */
+    color: #FF4B4B;
+    text-decoration: none;
 }
 </style>
 """
