@@ -86,21 +86,40 @@ if st.button("Download"):
     else:
         st.warning("Please enter a URL.")
 
-# --- FOOTER ---
-st.markdown(
-    """
-    <div style="text-align: center; color: grey;">
-        <p>
-            Made with ❤️ by 
-            <a 
-                href="https://github.com/denizyozgatli" 
-                target="_blank" 
-                style="color: #FF4B4B; text-decoration: none;"
-            >
-                denizyozgatli
-            </a>
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# --- FOOTER (CSS ile sayfa altına sabitlenmiş) ---
+footer_style = """
+<style>
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #0E1117; /* Streamlit'in koyu tema arka plan rengi */
+    color: grey;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #262730; /* İnce bir ayırıcı çizgi */
+}
+.footer a {
+    color: #FF4B4B; /* Streamlit'in ana rengi */
+    text-decoration: none; /* Link altı çizgisini kaldırır */
+}
+</style>
+"""
+
+footer_html = """
+<div class="footer">
+    <p>
+        Built by 
+        <a 
+            href="https://github.com/denizyozgatli" 
+            target="_blank"
+        >
+            denizyozgatli
+        </a>
+    </p>
+</div>
+"""
+
+st.markdown(footer_style, unsafe_allow_html=True)
+st.markdown(footer_html, unsafe_allow_html=True)
