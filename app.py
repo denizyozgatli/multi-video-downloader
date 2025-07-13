@@ -6,13 +6,13 @@ import time
 
 # --- Sayfa Ayarları ve Başlık ---
 st.set_page_config(
-    page_title="Sosyal Medya Video İndirici",
+    page_title="SVideo Downloader",
     page_icon="📥",
     layout="centered"
 )
 
-st.title("📥 Sosyal Medya Video İndirici")
-st.markdown("TikTok, Twitter ve Instagram'dan videoları kolayca indirin. Sadece videonun linkini yapıştırın!")
+st.title("Video Downloader")
+st.markdown("Easily download videos from TikTok, Twitter and Instagram!")
 
 # --- İndirme Klasörü ---
 DOWNLOAD_DIR = "downloads"
@@ -34,7 +34,6 @@ def get_video_info(url):
             filename = f"{title}.{ext}"
             return os.path.join(DOWNLOAD_DIR, filename)
     except Exception:
-        # Hata durumunda rastgele bir isim kullan
         return os.path.join(DOWNLOAD_DIR, f"video_{int(time.time())}.mp4")
 
 
@@ -48,7 +47,6 @@ def download_video_streamlit(url, placeholder):
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
         'noplaylist': True,
         'quiet': True,
-        # İlerleme durumunu yakalamak için hook
         'progress_hooks': [lambda d: placeholder.text(f"İndiriliyor... {d.get('_percent_str', '0%')}")]
     }
 
@@ -57,41 +55,33 @@ def download_video_streamlit(url, placeholder):
             ydl.download([url])
         return file_path
     except Exception as e:
-        st.error(f"Hata: Video indirilemedi. URL'nin doğru ve herkese açık olduğundan emin olun.")
+        st.error(f"Error: The video could not be downloaded. Make sure the URL is correct and public.")
         st.error(f"Detay: {e}")
         return None
 
-# --- Arayüz Elemanları ---
-url = st.text_input("🔗 Video URL'sini buraya yapıştırın:", placeholder="https.tiktok.com/...")
+url = st.text_input("Paste video URL here:", placeholder="https.tiktok.com/...")
 
-if st.button("📥 Videoyu İndir"):
+if st.button("Download"):
     if url:
-        # URL'nin temel bir geçerlilik kontrolü
         if "tiktok.com" in url or "twitter.com" in url or "instagram.com" in url or "x.com" in url:
             progress_placeholder = st.empty()
-            with st.spinner("Video bilgileri alınıyor..."):
+            with st.spinner("Retrieving video information......"):
                 video_path = download_video_streamlit(url, progress_placeholder)
             
             if video_path and os.path.exists(video_path):
-                st.success("✅ Video başarıyla indirildi!")
+                st.success("Video downloaded successfully!")
                 
-                # Videoyu doğrudan sayfada göster
                 st.video(video_path)
                 
-                # İndirme butonu
                 with open(video_path, "rb") as file:
                     st.download_button(
-                        label="⬇️ Bilgisayarına Kaydet",
+                        label="Download",
                         data=file,
                         file_name=os.path.basename(video_path),
                         mime="video/mp4"
                     )
-                
-                # Sunucudaki dosyayı temizlemek için (isteğe bağlı ama iyi bir pratik)
-                # os.remove(video_path) 
-                # Not: Streamlit Cloud'da geçici dosya sistemi kullanılır, 
-                # bu nedenle manuel silme her zaman gerekli olmayabilir.
+                    
         else:
-            st.warning("Lütfen geçerli bir TikTok, Twitter veya Instagram URL'si girin.")
+            st.warning("Please enter a valid URL.")
     else:
-        st.warning("Lütfen bir URL girin.")
+        st.warning("Please enter a URL.")
